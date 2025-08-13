@@ -1,0 +1,85 @@
+アドレス		コード		     マシン語
+DE64		ld hl,$DA00		21 00 DA
+DE67		call $DEAD		CD AD DE
+DE6A		push hl		    E5
+DE6B		ld bc,$FFF8		01 F8 FF
+DE6E		add hl,bc		  09
+DE6F		ld d,h		    54
+DE70		ld e,l		    5D
+DE71		ld hl,$C3AC		21 AC C3
+DE74		ld b,$13		  06 13
+DE76		push bc		    C5
+DE77		ld a,$7C		  3E 7C
+DE79		ld [hl+],a		22
+DE7A		ld a,d		    7A
+DE7B		call $DE9A		CD 9A DE
+DE7E		ld a,e		    7B
+DE7F		call $DE9A		CD 9A DE
+DE82		ld a,$7F		  3E 7F
+DE84		ld [hl+],a		22
+DE85		ld a,[de]		  1A
+DE86		inc de		    13
+DE87		call $DE9A		CD 9A DE
+DE8A		ld bc,$000C		01 0C 00
+DE8D		add hl,bc		  09
+DE8E		pop bc		    C1
+DE8F		dec b		      05
+DE90		jr nz,pc+-28	20 E4
+DE92		pop hl		    E1
+DE93		ld a,$ED		  3E ED
+DE95		ld [$C44C],a	EA 4C C4
+DE98		jr pc+-51		  18 CD
+DE9A		ld b,$02		  06 02
+DE9C		ld c,a		    4F
+DE9D		swap c		    CB 31
+DE9F		ld a,$0F		  3E 0F
+DEA1		and c		      A1
+DEA2		add $F6		    C6 F6
+DEA4		jr nc,pc++2		30 02
+DEA6		add $60		    C6 60
+DEA8		ld [hl+],a		22
+DEA9		dec b		      05
+DEAA		jr nz,pc+-15	20 F1
+DEAC		ret		        C9
+DEAD		ld a,$FF		  3E FF
+DEAF		ldh [$b7],a		E0 B7
+DEB1		call $3867		CD 67 38
+DEB4		ldh a,[$b5]		F0 B5
+DEB6		ld b,a		    47
+DEB7		xor a		      AF
+DEB8		bit 3,b		    CB 58
+DEBA		jr z,pc++2		28 02
+DEBC		pop bc		    C1
+DEBD		ret		        C9
+DEBE		bit 2,b		    CB 50
+DEC0		jr z,pc++1		28 01
+DEC2		jp hl		      E9
+DEC3		rlc b		      CB 00
+DEC5		jr nc,pc++2		30 02
+DEC7		add $01		    C6 01
+DEC9		rlc b		      CB 00
+DECB		jr nc,pc++2		30 02
+DECD		add $FF		    C6 FF
+DECF		rlc b		      CB 00
+DED1		jr nc,pc++2		30 02
+DED3		add $F0		    C6 F0
+DED5		rlc b		      CB 00
+DED7		jr nc,pc++2		30 02
+DED9		add $10		    C6 10
+DEDB		bit 0,e		    CB 43
+DEDD		jr z,pc++3		28 03
+DEDF		add [hl]		  86
+DEE0		ld [hl],a		  77
+DEE1		ret		        C9
+DEE2		bit 1,e		    CB 4B
+DEE4		jr z,pc++3		28 03
+DEE6		add h		      84
+DEE7		ld h,a		    67
+DEE8		ret		        C9
+DEE9		ld b,$00		  06 00
+DEEB		bit 7,a		    CB 7F
+DEED		jr z,pc++2		28 02
+DEEF		ld b,$FF		  06 FF
+DEF1		ld c,a		    4F
+DEF2		add hl,bc		  09
+DEF3		ret		        C9
