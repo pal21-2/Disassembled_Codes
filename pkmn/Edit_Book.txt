@@ -1,4 +1,4 @@
-アドレス コード       マシン語
+アドレス マシン語       コード
 DA00    FA FF D9    ld a,[$D9FF]
 DA03    A7          and a
 DA04    CC 11 DD    call z,$DD11
