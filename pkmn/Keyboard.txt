@@ -1,0 +1,568 @@
+アドレス マシン語      コード
+DA00    AF          xor a
+DA01    21 B2 D9    ld hl,$D9B2
+DA04    22          ld [hl+],a
+DA05    22          ld [hl+],a
+DA06    22          ld [hl+],a
+DA07    EA 03 C3    ld [$C303],a
+DA0A    21 AF D6    ld hl,$D6AF
+DA0D    CB F6       set 6,[hl]
+DA0F    CD BF 03    call $03BF
+DA12    CD AB 0E    call $0EAB
+DA15    CD 31 0B    call $0B31
+DA18    CD AE DA    call $DAAE
+DA1B    3E FF       ld a,$FF
+DA1D    EA B2 CF    ld [$CFB2],a
+DA20    F3          di
+DA21    01 12 03    ld bc,$0312
+DA24    21 A0 C3    ld hl,$C3A0
+DA27    CD D2 03    call $03D2
+DA2A    CD 6C DC    call $DC6C
+DA2D    3E 50       ld a,$50
+DA2F    CD 16 DB    call $DB16
+DA32    FB          ei
+DA33    CD E8 DB    call $DBE8
+DA36    CD 4D DC    call $DC4D
+DA39    CD 67 38    call $3867
+DA3C    F0 B3       ldh a,[$B3]
+DA3E    47          ld b,a
+DA3F    CB 58       bit 3,b
+DA41    28 06       jr z,pc++6
+DA43    3E 01       ld a,$01
+DA45    EA B2 CF    ld [$CFB2],a
+DA48    C9          ret
+DA49    CB 50       bit 2,b
+DA4B    28 10       jr z,pc++16
+DA4D    21 B2 D9    ld hl,$D9B2
+DA50    34          inc [hl]
+DA51    3E 02       ld a,$02
+DA53    BE          cp [hl]
+DA54    30 02       jr nc,pc++2
+DA56    AF          xor a
+DA57    77          ld [hl],a
+DA58    CD 6C DC    call $DC6C
+DA5B    06 00       ld b,$00
+DA5D    CB 48       bit 1,b
+DA5F    D5          push de
+DA60    C4 BD DA    call nz,$DABD
+DA63    D1          pop de
+DA64    FA B4 D9    ld a,[$D9B4]
+DA67    CB 60       bit 4,b
+DA69    28 01       jr z,pc++1
+DA6B    3C          inc a
+DA6C    CB 68       bit 5,b
+DA6E    28 01       jr z,pc++1
+DA70    3D          dec a
+DA71    CB 70       bit 6,b
+DA73    28 02       jr z,pc++2
+DA75    D6 10       sub $10
+DA77    CB 78       bit 7,b
+DA79    28 02       jr z,pc++2
+DA7B    C6 10       add $10
+DA7D    47          ld b,a
+DA7E    E6 0F       and $0F
+DA80    FE 0F       cp $0F
+DA82    20 03       jr nz,pc++3
+DA84    3E 02       ld a,$02
+DA86    04          inc b
+DA87    FE 03       cp $03
+DA89    20 01       jr nz,pc++1
+DA8B    AF          xor a
+DA8C    4F          ld c,a
+DA8D    78          ld a,b
+DA8E    E6 F0       and $F0
+DA90    FE F0       cp $F0
+DA92    20 02       jr nz,pc++2
+DA94    3E 30       ld a,$30
+DA96    FE 40       cp $40
+DA98    20 01       jr nz,pc++1
+DA9A    AF          xor a
+DA9B    81          add c
+DA9C    EA B4 D9    ld [$D9B4],a
+DA9F    CB 43       bit 0,e
+DAA1    C4 94 DB    call nz,$DB94
+DAA4    C3 33 DA    jp $DA33
+DAA7    21 7B D2    ld hl,$D27B
+DAAA    2A          ld a,[hl+]
+DAAB    66          ld h,[hl]
+DAAC    6F          ld l,a
+DAAD    C9          ret
+DAAE    3E 0A       ld a,$0A
+DAB0    EA 00 00    ld [$0000],a
+DAB3    3E 01       ld a,$01
+DAB5    EA 00 60    ld [$6000],a
+DAB8    3C          inc a
+DAB9    EA 00 40    ld [$4000],a
+DABC    C9          ret
+DABD    CD A7 DA    call $DAA7
+DAC0    2A          ld a,[hl+]
+DAC1    FE 50       cp $50
+DAC3    20 FB       jr nz,pc+-5
+DAC5    2B          dec hl
+DAC6    2B          dec hl
+DAC7    3A          ld a,[hl-]
+DAC8    FE 4E       cp $4E
+DACA    20 05       jr nz,pc++5
+DACC    3A          ld a,[hl-]
+DACD    FE 4E       cp $4E
+DACF    28 0C       jr z,pc++12
+DAD1    7E          ld a,[hl]
+DAD2    FE E4       cp $E4
+DAD4    28 05       jr z,pc++5
+DAD6    FE E5       cp $E5
+DAD8    28 01       jr z,pc++1
+DADA    23          inc hl
+DADB    36 50       ld [hl],$50
+DADD    01 12 03    ld bc,$0312
+DAE0    21 A0 C3    ld hl,$C3A0
+DAE3    CD D2 03    call $03D2
+DAE6    3E 50       ld a,$50
+DAE8    C3 16 DB    jp $DB16
+DAEB    FA B3 D9    ld a,[$D9B3]
+DAEE    FE 0A       cp $0A
+DAF0    3E BA       ld a,$BA
+DAF2    C0          ret nz
+DAF3    2B          dec hl
+DAF4    11 9F DC    ld de,$DC9F
+DAF7    1A          ld a,[de]
+DAF8    13          inc de
+DAF9    13          inc de
+DAFA    FE FF       cp $FF
+DAFC    28 06       jr z,pc++6
+DAFE    BE          cp [hl]
+DAFF    20 F6       jr nz,pc+-10
+DB01    1B          dec de
+DB02    1A          ld a,[de]
+DB03    C9          ret
+DB04    C1          pop bc
+DB05    23          inc hl
+DB06    C3 30 DB    jp $DB30
+DB09    F3          di
+DB0A    01 12 03    ld bc,$0312
+DB0D    21 A0 C3    ld hl,$C3A0
+DB10    CD D2 03    call $03D2
+DB13    CD 78 DB    call $DB78
+DB16    47          ld b,a
+DB17    CD A7 DA    call $DAA7
+DB1A    2A          ld a,[hl+]
+DB1B    FE 50       cp $50
+DB1D    20 FB       jr nz,pc+-5
+DB1F    2B          dec hl
+DB20    78          ld a,b
+DB21    FE E5       cp $E5
+DB23    28 02       jr z,pc++2
+DB25    FE E4       cp $E4
+DB27    CA 52 DB    jp z,$DB52
+DB2A    FE BA       cp $BA
+DB2C    CC EB DA    call z,$DAEB
+DB2F    22          ld [hl+],a
+DB30    3E 50       ld a,$50
+DB32    77          ld [hl],a
+DB33    3E 4E       ld a,$4E
+DB35    2B          dec hl
+DB36    BE          cp [hl]
+DB37    20 FC       jr nz,pc+-4
+DB39    23          inc hl
+DB3A    54          ld d,h
+DB3B    5D          ld e,l
+DB3C    21 C9 C3    ld hl,$C3C9
+DB3F    CD 05 04    call $0405
+DB42    FB          ei
+DB43    21 25 3C    ld hl,$3C25
+DB46    09          add hl,bc
+DB47    7C          ld a,h
+DB48    B5          or l
+DB49    C0          ret nz
+DB4A    3E 4E       ld a,$4E
+DB4C    12          ld [de],a
+DB4D    13          inc de
+DB4E    3E 50       ld a,$50
+DB50    12          ld [de],a
+DB51    C9          ret
+DB52    F5          push af
+DB53    2B          dec hl
+DB54    2B          dec hl
+DB55    7E          ld a,[hl]
+DB56    FE E4       cp $E4
+DB58    28 19       jr z,pc++25
+DB5A    FE E5       cp $E5
+DB5C    28 15       jr z,pc++21
+DB5E    23          inc hl
+DB5F    7E          ld a,[hl]
+DB60    FE 4E       cp $4E
+DB62    20 05       jr nz,pc++5
+DB64    2B          dec hl
+DB65    2B          dec hl
+DB66    7E          ld a,[hl]
+DB67    18 ED       jr pc+-19
+DB69    47          ld b,a
+DB6A    F1          pop af
+DB6B    22          ld [hl+],a
+DB6C    70          ld [hl],b
+DB6D    23          inc hl
+DB6E    3E 50       ld a,$50
+DB70    77          ld [hl],a
+DB71    18 02       jr pc++2
+DB73    F1          pop af
+DB74    77          ld [hl],a
+DB75    C3 33 DB    jp $DB33
+DB78    21 A0 C3    ld hl,$C3A0
+DB7B    FA 00 C3    ld a,[$C300]
+DB7E    07          rlca
+DB7F    CB 37       swap a
+DB81    3D          dec a
+DB82    01 14 00    ld bc,$0014
+DB85    09          add hl,bc
+DB86    3D          dec a
+DB87    20 FC       jr nz,pc+-4
+DB89    FA 01 C3    ld a,[$C301]
+DB8C    07          rlca
+DB8D    CB 37       swap a
+DB8F    3D          dec a
+DB90    4F          ld c,a
+DB91    09          add hl,bc
+DB92    7E          ld a,[hl]
+DB93    C9          ret
+DB94    CD 67 38    call $3867
+DB97    F3          di
+DB98    CD E8 DB    call $DBE8
+DB9B    F0 B4       ldh a,[$B4]
+DB9D    47          ld b,a
+DB9E    AF          xor a
+DB9F    21 00 C3    ld hl,$C300
+DBA2    CB 70       bit 6,b
+DBA4    28 02       jr z,pc++2
+DBA6    3E F0       ld a,$F0
+DBA8    CB 78       bit 7,b
+DBAA    28 02       jr z,pc++2
+DBAC    3E 10       ld a,$10
+DBAE    86          add [hl]
+DBAF    22          ld [hl+],a
+DBB0    AF          xor a
+DBB1    CB 60       bit 4,b
+DBB3    28 02       jr z,pc++2
+DBB5    3E 10       ld a,$10
+DBB7    CB 68       bit 5,b
+DBB9    28 02       jr z,pc++2
+DBBB    3E F0       ld a,$F0
+DBBD    86          add [hl]
+DBBE    77          ld [hl],a
+DBBF    CD 0E DC    call $DC0E
+DBC2    FA B3 D9    ld a,[$D9B3]
+DBC5    FE 0A       cp $0A
+DBC7    11 7D DD    ld de,$DD7D
+DBCA    21 BF C4    ld hl,$C4BF
+DBCD    38 0B       jr c,pc++11
+DBCF    28 06       jr z,pc++6
+DBD1    11 82 DD    ld de,$DD82
+DBD4    21 C3 C4    ld hl,$C4C3
+DBD7    CD 3B DC    call $DC3B
+DBDA    FB          ei
+DBDB    F0 B2       ldh a,[$B2]
+DBDD    CB 47       bit 0,a
+DBDF    28 B3       jr z,pc+-77
+DBE1    CD 09 DB    call $DB09
+DBE4    CD 6C DC    call $DC6C
+DBE7    C9          ret
+DBE8    21 00 C3    ld hl,$C300
+DBEB    FA B4 D9    ld a,[$D9B4]
+DBEE    47          ld b,a
+DBEF    CB 37       swap a
+DBF1    E6 0F       and $0F
+DBF3    3C          inc a
+DBF4    4F          ld c,a
+DBF5    3E 38       ld a,$38
+DBF7    C6 10       add $10
+DBF9    0D          dec c
+DBFA    20 FB       jr nz,pc+-5
+DBFC    22          ld [hl+],a
+DBFD    78          ld a,b
+DBFE    E6 0F       and $0F
+DC00    3C          inc a
+DC01    4F          ld c,a
+DC02    3E 30       ld a,$30
+DC04    C6 10       add $10
+DC06    0D          dec c
+DC07    20 FB       jr nz,pc+-5
+DC09    22          ld [hl+],a
+DC0A    3E EE       ld a,$EE
+DC0C    77          ld [hl],a
+DC0D    C9          ret
+DC0E    FA B3 D9    ld a,[$D9B3]
+DC11    21 D0 DC    ld hl,$DCD0
+DC14    85          add l
+DC15    6F          ld l,a
+DC16    4E          ld c,[hl]
+DC17    06 00       ld b,$00
+DC19    21 08 C4    ld hl,$C408
+DC1C    09          add hl,bc
+DC1D    E5          push hl
+DC1E    01 C1 FF    ld bc,$FFC1
+DC21    09          add hl,bc
+DC22    01 05 05    ld bc,$0505
+DC25    CD D2 03    call $03D2
+DC28    CD 5F DC    call $DC5F
+DC2B    FA B3 D9    ld a,[$D9B3]
+DC2E    A7          and a
+DC2F    28 07       jr z,pc++7
+DC31    01 05 00    ld bc,$0005
+DC34    09          add hl,bc
+DC35    3D          dec a
+DC36    18 F7       jr pc+-9
+DC38    54          ld d,h
+DC39    5D          ld e,l
+DC3A    E1          pop hl
+DC3B    1A          ld a,[de]
+DC3C    77          ld [hl],a
+DC3D    01 E2 DC    ld bc,$DCE2
+DC40    0A          ld a,[bc]
+DC41    A7          and a
+DC42    28 08       jr z,pc++8
+DC44    85          add l
+DC45    6F          ld l,a
+DC46    13          inc de
+DC47    1A          ld a,[de]
+DC48    77          ld [hl],a
+DC49    03          inc bc
+DC4A    18 F4       jr pc+-12
+DC4C    C9          ret
+DC4D    21 C3 DC    ld hl,$DCC3
+DC50    06 FF       ld b,$FF
+DC52    FA B4 D9    ld a,[$D9B4]
+DC55    23          inc hl
+DC56    04          inc b
+DC57    BE          cp [hl]
+DC58    20 FB       jr nz,pc+-5
+DC5A    78          ld a,b
+DC5B    EA B3 D9    ld [$D9B3],a
+DC5E    C9          ret
+DC5F    FA B2 D9    ld a,[$D9B2]
+DC62    87          add a
+DC63    21 DC DC    ld hl,$DCDC
+DC66    85          add l
+DC67    6F          ld l,a
+DC68    2A          ld a,[hl+]
+DC69    66          ld h,[hl]
+DC6A    6F          ld l,a
+DC6B    C9          ret
+DC6C    01 09 0B    ld bc,$0B09
+DC6F    21 08 C4    ld hl,$C408
+DC72    CD D2 03    call $03D2
+DC75    CD 5F DC    call $DC5F
+DC78    54          ld d,h
+DC79    5D          ld e,l
+DC7A    01 0A 00    ld bc,$000A
+DC7D    C5          push bc
+DC7E    78          ld a,b
+DC7F    21 D0 DC    ld hl,$DCD0
+DC82    85          add l
+DC83    6F          ld l,a
+DC84    06 00       ld b,$00
+DC86    4E          ld c,[hl]
+DC87    21 08 C4    ld hl,$C408
+DC8A    09          add hl,bc
+DC8B    1A          ld a,[de]
+DC8C    77          ld [hl],a
+DC8D    13          inc de
+DC8E    13          inc de
+DC8F    13          inc de
+DC90    13          inc de
+DC91    13          inc de
+DC92    C1          pop bc
+DC93    04          inc b
+DC94    0D          dec c
+DC95    20 E6       jr nz,pc+-26
+DC97    3E F2       ld a,$F2
+DC99    EA C3 C4    ld [$C4C3],a
+DC9C    1E 00       ld e,$00
+DC9E    C9          ret
+DC9F    B1          or c
+DCA0    76          halt
+DCA1    B2          or d
+DCA2    6E          ld l,[hl]
+DCA3    B3          or e
+DCA4    6F          ld l,a
+DCA5    B4          or h
+DCA6    77          ld [hl],a
+DCA7    B5          or l
+DCA8    78          ld a,b
+DCA9    D4 E0 D5    call nc,$D5E0
+DCAC    E1          pop hl
+DCAD    D6 E2       sub $E2
+DCAF    C2 DF 80    jp nz,$80DF
+DCB2    E9          jp hl
+DCB3    81          add c
+DCB4    B0          or b
+DCB5    82          add d
+DCB6    EA 83 EB    ld [$EB83],a
+DCB9    84          add h
+DCBA    F4          db $f4
+DCBB    A2          and d
+DCBC    AD          xor l
+DCBD    A3          and e
+DCBE    AE          xor [hl]
+DCBF    A4          and h
+DCC0    AF          xor a
+DCC1    91          sub c
+DCC2    AC          xor h
+DCC3    FF          rst $38
+DCC4    00          nop
+DCC5    01 02 10    ld bc,$1002
+DCC8    11 12 20    ld de,$2012
+DCCB    21 22 31    ld hl,$3122
+DCCE    30 32       jr nc,pc++50
+DCD0    3F          ccf
+DCD1    41          ld b,c
+DCD2    43          ld b,e
+DCD3    67          ld h,a
+DCD4    69          ld l,c
+DCD5    6B          ld l,e
+DCD6    8F          adc a
+DCD7    91          sub c
+DCD8    93          sub e
+DCD9    B9          cp c
+DCDA    B7          or a
+DCDB    BB          cp e
+DCDC    E7          rst $20
+DCDD    DC 19 DD    call c,$DD19
+DCE0    4B          ld c,e
+DCE1    DD          db $dd
+DCE2    FE DA       cp $DA
+DCE4    2A          ld a,[hl+]
+DCE5    26 00       ld h,$00
+DCE7    B1          or c
+DCE8    B2          or d
+DCE9    B3          or e
+DCEA    B4          or h
+DCEB    B5          or l
+DCEC    B6          or [hl]
+DCED    B7          or a
+DCEE    B8          cp b
+DCEF    B9          cp c
+DCF0    BA          cp d
+DCF1    BB          cp e
+DCF2    BC          cp h
+DCF3    BD          cp l
+DCF4    BE          cp [hl]
+DCF5    BF          cp a
+DCF6    C0          ret nz
+DCF7    C1          pop bc
+DCF8    C2 C3 C4    jp nz,$C4C3
+DCFB    C5          push bc
+DCFC    C6 C7       add $C7
+DCFE    C8          ret z
+DCFF    C9          ret
+DD00    CA CB CC    jp z,$CCCB
+DD03    CD CE CF    call $CFCE
+DD06    D0          ret nc
+DD07    D1          pop de
+DD08    D2 D3 D4    jp nc,$D4D3
+DD0B    70          ld [hl],b
+DD0C    D5          push de
+DD0D    71          ld [hl],c
+DD0E    D6 D7       sub $D7
+DD10    D8          ret c
+DD11    D9          reti
+DD12    DA DB DC    jp c,$DCDB
+DD15    DD          db $dd
+DD16    DE E3       sbc $E3
+DD18    F0 80       ldh a,[$80]
+DD1A    81          add c
+DD1B    82          add d
+DD1C    83          add e
+DD1D    84          add h
+DD1E    85          add l
+DD1F    86          add [hl]
+DD20    87          add a
+DD21    88          adc b
+DD22    89          adc c
+DD23    8A          adc d
+DD24    8B          adc e
+DD25    8C          adc h
+DD26    8D          adc l
+DD27    8E          adc [hl]
+DD28    8F          adc a
+DD29    90          sub b
+DD2A    91          sub c
+DD2B    92          sub d
+DD2C    93          sub e
+DD2D    94          sub h
+DD2E    95          sub l
+DD2F    96          sub [hl]
+DD30    97          sub a
+DD31    98          sbc b
+DD32    99          sbc c
+DD33    9A          sbc d
+DD34    9B          sbc e
+DD35    CD 9C 9D    call $9D9C
+DD38    9E          sbc [hl]
+DD39    9F          sbc a
+DD3A    A0          and b
+DD3B    A1          and c
+DD3C    A2          and d
+DD3D    72          ld [hl],d
+DD3E    A3          and e
+DD3F    73          ld [hl],e
+DD40    A4          and h
+DD41    A5          and l
+DD42    D8          ret c
+DD43    A6          and [hl]
+DD44    A7          and a
+DD45    A8          xor b
+DD46    A9          xor c
+DD47    AA          xor d
+DD48    AB          xor e
+DD49    E3          db $e3
+DD4A    F0 F7       ldh a,[$F7]
+DD4C    60          ld h,b
+DD4D    61          ld h,c
+DD4E    62          ld h,d
+DD4F    63          ld h,e
+DD50    F8 64       ld hl,sp++100
+DD52    65          ld h,l
+DD53    66          ld h,[hl]
+DD54    67          ld h,a
+DD55    F9          ld sp,hl
+DD56    68          ld l,b
+DD57    69          ld l,c
+DD58    6A          ld l,d
+DD59    6B          ld l,e
+DD5A    FA 72 6C    ld a,[$6C72]
+DD5D    73          ld [hl],e
+DD5E    74          ld [hl],h
+DD5F    FB          ei
+DD60    ED          db $ed
+DD61    EC          db $ec
+DD62    EE 6D       xor $6D
+DD64    FC          db $fc
+DD65    F1          pop af
+DD66    F2          ld a,[c]
+DD67    F3          di
+DD68    7F          ld a,a
+DD69    FD          db $fd
+DD6A    EF          rst $28
+DD6B    7F          ld a,a
+DD6C    F5          push af
+DD6D    7F          ld a,a
+DD6E    FE 79       cp $79
+DD70    7A          ld a,d
+DD71    7B          ld a,e
+DD72    7C          ld a,h
+DD73    FF          rst $38
+DD74    7D          ld a,l
+DD75    7F          ld a,a
+DD76    7E          ld a,[hl]
+DD77    7F          ld a,a
+DD78    F6 75       or $75
+DD7A    F2          ld a,[c]
+DD7B    E3          db $e3
+DD7C    F0 7F       ldh a,[$7F]
+DD7E    E5          push hl
+DD7F    BA          cp d
+DD80    E4          db $e4
+DD81    7F          ld a,a
+DD82    F2          ld a,[c]
+DD83    E8 E6       add sp,-26
+DD85    E7          rst $20
+DD86    75          ld [hl],l
+   
